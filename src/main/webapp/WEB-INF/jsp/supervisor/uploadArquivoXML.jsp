@@ -17,7 +17,7 @@
 		<input type="submit" class="btn primary" value="Enviar">
 		&nbsp;
 		<button type="reset" class="btn">Limpar</button>
-		&nbsp; <a href="<c:url value="/supervisor/projetos/editar/${idProjeto}"/>">
+		&nbsp; <a href="<c:url value="/supervisor/projetos/${idProjeto}/editar"/>">
 			<button type="button" class="btn">Cancelar</button> </a>
 	</div>
 </form>

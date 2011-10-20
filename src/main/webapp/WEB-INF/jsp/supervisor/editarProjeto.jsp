@@ -1,11 +1,3 @@
-<c:if test="${!empty errors}">
-	<div class="alert-message error">
-		<c:forEach var="error" items="${errors}">
-			${error.category} - ${error.message} <br/>
-		</c:forEach>
-	</div>
-</c:if>
-
 <div class="page-header">
 	<h2> Editar Projeto </h2>
 </div>
@@ -22,11 +14,19 @@
 			<div class="btn primary medium" id="testadores" style="margin-right:10px">Repositório ODI</div> 
 		</a>
 		<a onclick="return confirm('Deseja excluir ${projeto.nome}?')" 
-		   href="<c:url value="/supervisor/projetos/deletar/${projeto.ID}"/>">
+		   href="<c:url value="/supervisor/projetos/${projeto.ID}/deletar"/>">
 			<div class="btn danger medium" id="novoProjeto" style="float:right">Excluir Projeto</div> 
 		</a>
 	</div>
 </div>
+
+<c:if test="${!empty errors}">
+	<div class="alert-message error">
+		<c:forEach var="error" items="${errors}">
+			${error.category} - ${error.message} <br/>
+		</c:forEach>
+	</div>
+</c:if>
 
 <form action="<c:url value="/supervisor/projetos"/>" method="post">
 	<fieldset>

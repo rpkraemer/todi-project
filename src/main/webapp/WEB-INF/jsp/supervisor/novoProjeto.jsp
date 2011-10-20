@@ -1,3 +1,15 @@
+<div class="page-header">
+	<h2> Novo Projeto </h2>
+</div>
+
+<div class="container">
+	<div class="hero-unit" style="padding:6px; margin-top:0px">
+		<a href="<c:url value="/supervisor"/>">
+			<div class="btn primary medium" id="voltar" style="margin-right: 10px">Voltar</div> 
+		</a>
+	</div>
+</div>
+
 <c:if test="${!empty errors}">
 	<div class="alert-message error">
 		<c:forEach var="error" items="${errors}">
@@ -5,10 +17,6 @@
 		</c:forEach>
 	</div>
 </c:if>
-
-<div class="page-header">
-	<h2> Novo Projeto </h2>
-</div>
 
 <form action="<c:url value="/supervisor/projetos"/>" method="post">
 	<fieldset>

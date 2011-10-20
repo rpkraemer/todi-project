@@ -23,7 +23,7 @@
 						<td> ${projeto.ID} </td>
 						<td> ${projeto.nome} </td>
 						<td align="center">
-							<a href="<c:url value="/supervisor/projetos/editar/${projeto.ID}"/>">
+							<a href="<c:url value="/supervisor/projetos/${projeto.ID}/editar"/>">
 								<img alt="Editar" src="<c:url value="/img/editar.png"/>" border="0">
 							</a>
 						</td>
