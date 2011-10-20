@@ -1,0 +1,115 @@
+@CHARSET "ISO-8859-1";
+
+body {
+	margin: 0;
+	padding: 0;
+	color: #333333;
+	font: bold 18px 'Open Sans', arial, sans-serif;
+}
+
+#app {
+	width: 70%;
+	margin: auto;
+	min-height: 600px;
+	height: 100%;
+}
+
+img {
+	float: left;
+	padding: 0;
+	margin: 0;
+	border: 0
+}
+
+#header {
+	height: 72px;
+	background-color: #F5F5F5;
+	border-bottom: 1px solid #E5E5E5;
+}
+
+#header img {
+	float: left;
+	margin-top: 2px;
+	width: 64px;
+	height: 64px
+}
+
+#title {
+	width: 70%;
+	height: 68px;
+	font-size: 30px;
+	margin: auto;
+}
+
+#login {
+	float: right;
+	width: 25%;
+	height: 50px;
+	margin: auto;
+}
+
+.middle {
+	float: left;
+	margin-top: 12px
+}
+
+.red {
+	color: red;
+}
+
+.error {
+	text-align: center;
+	border:2px solid red;
+	width: 100%;
+	color:white;
+	font-size:12px;
+	height: 20px;
+	background-color: gray;	
+}
+
+.success {
+	text-align: center;
+	border:2px solid blue;
+	width: 100%;
+	color:white;
+	font-size:12px;
+	height: 20px;
+	background-color: #F5F5F5;
+	color:black;
+}
+
+#login_container {
+	font-size:12px;
+	width:45%;
+	margin:auto;
+}
+
+.projetos {
+	font-size:14px;
+	width:75%;
+	margin:auto;
+	border:1px solid red;	
+}
+
+#loading {
+	background-image: url('img/loading.gif');	
+}
+
+form, input, table {
+	font-size:12px	
+}
+
+.saudacao {
+	float:right;	
+}
+
+.warn {
+	font-size:14px;
+	width:300px;
+	height:20px;
+	border:1px solid #cccccc;
+	padding: 4px;
+	background-color: #BCC35B;
+	text-align: center;
+	margin:auto;
+}
