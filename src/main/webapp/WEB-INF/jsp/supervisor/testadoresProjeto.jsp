@@ -4,7 +4,7 @@
 
 <div class="container">
 	<div class="hero-unit" style="padding: 6px; margin-top: 0px">
-		<a href="<c:url value="/supervisor/projetos/editar/${projeto.ID}"/>">
+		<a href="<c:url value="/supervisor/projetos/${projeto.ID}/editar"/>">
 			<div class="btn primary medium" id="voltar"
 				style="margin-right: 10px">
 				Voltar

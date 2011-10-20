@@ -22,15 +22,15 @@ public class TestadorRepositoryImpl implements TestadorRepository {
 	}
 
 	@Override
-	public void salvar(final Testador testador) {
-		Long idProjeto = testador.getProjeto().getID();
+	public void salvar(final Testador testador, Long idProjeto) {
+		Long idTestador = testador.getID();
 		
 		validator.validate(testador);
 		validator.checking(new Validations(){{
 			that(!testador.getNome().isEmpty(), "", "testador.nome.invalido");
 			that(!testador.getUsuario().isEmpty(), "", "testador.usuario.invalido");
 		}});
-		if (idProjeto == null) 
+		if (idTestador == null) 
 			validator.onErrorUsePageOf(SupervisorController.class).novoTestador( idProjeto );
 		else
 			validator.onErrorUsePageOf(SupervisorController.class).
@@ -59,6 +59,12 @@ public class TestadorRepositoryImpl implements TestadorRepository {
 	@Override
 	public long totalCadastrados() {
 		return testadorDAO.totalCadastrados();
+	}
+
+	@Override
+	public void salvar(Testador obj) {
+		// TODO Não utilizar
+		
 	}
 
 }

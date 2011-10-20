@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="hero-unit" style="padding:6px; margin-top:0px">
-		<a href="<c:url value="/supervisor/projetos/editar/${idProjeto}"/>">
+		<a href="<c:url value="/supervisor/projetos/${idProjeto}/editar"/>">
 			<div class="btn primary medium" id="voltar" style="margin-right: 10px">Voltar</div> 
 		</a>
 		<a href="<c:url value="/supervisor/projetos/${idProjeto}/informacao-repositorio-odi/${repositorioInfo.ID}/trocar-senha"/>">
@@ -59,7 +59,7 @@
 	<div class="actions">
 		<input type="submit" class="btn primary" value="Salvar Alterações"> &nbsp; 
 		<button type="reset" class="btn"> Limpar </button> &nbsp;
-		<a href="<c:url value="/supervisor/projetos/editar/${idProjeto}"/>">
+		<a href="<c:url value="/supervisor/projetos/${idProjeto}/editar"/>">
 			<button type="button" class="btn"> Cancelar </button>
 		</a>
 	</div>

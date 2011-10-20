@@ -51,14 +51,14 @@ public class SupervisorController {
 	}
 	
 	@Get
-	@Path("/supervisor/projetos/editar/{idProjeto}")
+	@Path("/supervisor/projetos/{idProjeto}/editar")
 	public void editarProjeto(Long idProjeto) {
 		Projeto projeto = projetoRepository.pegarPorID(idProjeto);
 		result.include("projeto", projeto);
 	}
 	
 	@Get
-	@Path("/supervisor/projetos/deletar/{idProjeto}")
+	@Path("/supervisor/projetos/{idProjeto}/deletar")
 	public void deletarProjeto(Long idProjeto) {
 		projetoRepository.deletar(idProjeto);
 		result.redirectTo(this).home();
@@ -78,8 +78,8 @@ public class SupervisorController {
 	
 	@Post
 	@Path("/supervisor/projetos/{idProjeto}/testadores/salvar")
-	public void salvarTestador(Testador testador) {
-		testadorRepository.salvar(testador);
+	public void salvarTestador(Testador testador, Long idProjeto) {
+		testadorRepository.salvar(testador, idProjeto);
 		result.redirectTo(this).testadoresProjeto( testador.getProjeto().getID() );
 	}
 	

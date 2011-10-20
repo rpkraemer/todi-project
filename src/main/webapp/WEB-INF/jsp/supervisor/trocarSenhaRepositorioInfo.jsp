@@ -11,6 +11,14 @@
 	<h2>Informações do Repositório do Oracle Data Integrator</h2>
 </div>
 
+<div class="container">
+	<div class="hero-unit" style="padding:6px; margin-top:0px">
+		<a href="<c:url value="/supervisor/projetos/${idProjeto}/informacao-repositorio-odi"/>">
+			<div class="btn primary medium" id="voltar" style="margin-right: 10px">Voltar</div> 
+		</a>
+	</div>
+</div>
+
 <div class="clearfix">
 	<label for="usuario">Trocar a senha do</label>
 	<div class="input">
