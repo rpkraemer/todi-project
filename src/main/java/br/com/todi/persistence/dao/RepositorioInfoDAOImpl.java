@@ -5,7 +5,6 @@ import org.hibernate.Session;
 
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.todi.model.RepositorioInfo;
-import br.com.todi.util.Utilidades;
 
 @Component
 public class RepositorioInfoDAOImpl extends GDAO<RepositorioInfo> implements RepositorioInfoDAO {
