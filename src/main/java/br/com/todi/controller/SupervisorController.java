@@ -16,6 +16,9 @@ import br.com.todi.model.Testador;
 import br.com.todi.persistence.repository.ProjetoRepository;
 import br.com.todi.persistence.repository.RepositorioInfoRepository;
 import br.com.todi.persistence.repository.TestadorRepository;
+import br.com.todi.session.UsuarioSession;
+import br.com.todi.util.Modifier;
+import br.com.todi.util.Transformation;
 
 @Resource
 @Restrito(role="supervisor")
@@ -25,19 +28,42 @@ public class SupervisorController {
 	private ProjetoRepository projetoRepository;
 	private TestadorRepository testadorRepository;
 	private RepositorioInfoRepository repositorioInfoRepository;
+	private UsuarioSession usuarioSession;
 	
 	public SupervisorController(Result result, ProjetoRepository projetoRepository, 
-							    TestadorRepository testadorRepository, RepositorioInfoRepository repositorioInfoRepository) {
+							    TestadorRepository testadorRepository, 
+							    RepositorioInfoRepository repositorioInfoRepository,
+							    UsuarioSession usuarioSession) {
 		this.result = result;
 		this.projetoRepository = projetoRepository;
 		this.testadorRepository = testadorRepository;
 		this.repositorioInfoRepository = repositorioInfoRepository;
+		this.usuarioSession = usuarioSession;
+	}
+	
+	@Post
+	@Path("/supervisor/projetos/autenticar")
+	public void autenticarProjeto(Long idProjeto, String senha) {
+		if (projetoRepository.autenticarProjeto(idProjeto, senha)) {
+			usuarioSession.setProjetoAutenticado(idProjeto);
+			result.redirectTo(this).editarProjeto(idProjeto);
+		}
+		else
+			result.redirectTo(PagesController.class).acessoNegado();
 	}
 	
 	@Get
 	@Path("/supervisor")
 	public void home() {
-		result.include("projetoList", projetoRepository.listarTodos());
+		List<Projeto> projetos = projetoRepository.listarTodos();
+		Modifier.modify(projetos,new Transformation<Projeto>() {
+			@Override
+			public void each(Projeto projeto) {
+				if (usuarioSession.isProjetoAutenticado(projeto.getID()))
+					projeto.setIsAutenticadoUserSession(true);
+			}
+		});
+		result.include("projetoList", projetos);
 	}
 
 	@Get
@@ -46,7 +72,6 @@ public class SupervisorController {
 	
 	@Post
 	@Path("/supervisor/projetos")
-	@ProjetoAutenticado
 	public void salvarProjeto(Projeto projeto) {
 		projetoRepository.salvar(projeto);
 		result.redirectTo(this).home();
@@ -84,7 +109,6 @@ public class SupervisorController {
 	
 	@Post
 	@Path("/supervisor/projetos/{idProjeto}/testadores/salvar")
-	@ProjetoAutenticado
 	public void salvarTestador(Testador testador, Long idProjeto) {
 		testadorRepository.salvar(testador, idProjeto);
 		result.redirectTo(this).testadoresProjeto( testador.getProjeto().getID() );
@@ -117,8 +141,7 @@ public class SupervisorController {
 	}
 	
 	@Post
-	@Path("/supervisor/projetos/salvar/informacao-projeto-odi") //REVER ESTE PATH!!!
-	@ProjetoAutenticado
+	@Path("/supervisor/projetos/salvar/informacao-projeto-odi")
 	public void salvarInformacaoRepositorioODI(RepositorioInfo repoInfo, Long idProjeto) {
 		repositorioInfoRepository.salvar(repoInfo, idProjeto);
 		result.redirectTo(this).informacoesRepositorioODI(idProjeto);
@@ -142,7 +165,6 @@ public class SupervisorController {
 	
 	@Post
 	@Path("/supervisor/projetos/{idProjeto}/informacao-repositorio-odi/trocar-senha")
-	@ProjetoAutenticado
 	public void salvarSenhaRepositorioInfo(Long idProjeto, Long idRepoInfo, String novaSenha,
 			String senhaAtual, String tipoSenha) {
 		if (repositorioInfoRepository.salvarNovaSenha(novaSenha, senhaAtual, tipoSenha, idRepoInfo))
@@ -153,9 +175,9 @@ public class SupervisorController {
 	}	
 
 	@Post
-	@Path("/supervisor/projetos/upload/odi-xml")  //REVER ESTE PATH
-	@ProjetoAutenticado
+	@Path("/supervisor/projetos/upload/odi-xml")
 	public void odiXmlUploaded(UploadedFile xml, Long idProjeto) {
+		if (xml == null) result.forwardTo(this).informacoesRepositorioODI(idProjeto);
 		if ("SNPS_LOGIN_WORK.xml".equalsIgnoreCase(xml.getFileName())) {
 			List<RepositorioInfo> projetosODI = repositorioInfoRepository.processarArquivo(xml, idProjeto);
 			result.include("projetosODI", projetosODI);

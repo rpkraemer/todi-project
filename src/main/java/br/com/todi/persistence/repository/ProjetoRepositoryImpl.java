@@ -55,4 +55,9 @@ public class ProjetoRepositoryImpl implements ProjetoRepository {
 	public Projeto pegarPorID(long id) {
 		return projetoDAO.pegarPorID(id);
 	}
+
+	@Override
+	public boolean autenticarProjeto(Long idProjeto, String senha) {
+		return projetoDAO.autenticarProjeto(idProjeto, Utilidades.md5(senha));
+	}
 }

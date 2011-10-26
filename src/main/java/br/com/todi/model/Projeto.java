@@ -44,8 +44,11 @@ public class Projeto {
 	@Transient
 	private List<Artefato> artefatos;
 	
+	@Transient
+	private Boolean isAutenticadoUserSession = false;
+	
 	public Projeto() {
-		
+	
 	}
 	
 	public Long getID() {
@@ -95,5 +98,13 @@ public class Projeto {
 
 	public void setArtefatos(List<Artefato> artefatos) {
 		this.artefatos = artefatos;
+	}
+
+	public Boolean getIsAutenticadoUserSession() {
+		return isAutenticadoUserSession;
+	}
+
+	public void setIsAutenticadoUserSession(Boolean isAutenticadoUserSession) {
+		this.isAutenticadoUserSession = isAutenticadoUserSession;
 	}
 }
