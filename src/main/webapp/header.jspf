@@ -21,6 +21,7 @@
 	
 	<!-- Javascripts -->
 	<script src="<c:url value="/js/jquery.js"/>"></script>
+	<script src="<c:url value="/js/bootstrap-modal.js"/>"></script>
 	<script src="<c:url value="/js/bootstrap-alert.js"/>"></script>
 	
   </head>
@@ -30,15 +31,24 @@
     <div class="topbar">
       <div class="fill">
         <div class="container">
-          <h3><a href="#">TODI</a></h3>
-          <ul class="nav right">
+          <h3>
+          	<c:if test="${usuarioCorrente == null}"> 
+	          	<a href="#">TODI</a>
+          	</c:if>
+          	<c:if test="${usuarioCorrente != null and usuarioCorrente[1] == true}"> 
+	          	<a href="<c:url value="/supervisor"/>">TODI</a>
+          	</c:if>
+          	<c:if test="${usuarioCorrente != null and usuarioCorrente[1] == false}"> 
+	          	<a href="#">TODI</a>
+          	</c:if>
+          </h3>
           
+          <ul class="nav right">
           	<c:if test="${usuarioCorrente != null}">
             	<li>
             		<a href="<c:url value="/logout"/>">logout</a>
             	</li>
             </c:if>
-            
           </ul>
         </div>
       </div>

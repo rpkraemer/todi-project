@@ -8,6 +8,7 @@ import br.com.caelum.vraptor.interceptor.Interceptor;
 import br.com.caelum.vraptor.resource.ResourceMethod;
 import br.com.todi.annotation.Restrito;
 import br.com.todi.controller.LoginController;
+import br.com.todi.controller.PagesController;
 import br.com.todi.session.UsuarioSession;
 
 @Intercepts
@@ -55,5 +56,6 @@ public class LoginInterceptor implements Interceptor {
 			}
 		}
 		// TODO CRIAR PAGINAS FORBIDDEN, NOT FOUND ETC
+		result.forwardTo(PagesController.class).acessoNegado();
 	}
 }
