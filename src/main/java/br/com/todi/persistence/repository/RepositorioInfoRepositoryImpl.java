@@ -52,12 +52,12 @@ public class RepositorioInfoRepositoryImpl implements RepositorioInfoRepository 
 			validator.checking(new Validations(){{
 				that(!repoInfo.getLoginPass().isEmpty() || repoInfo.getLoginPass() == null, "", "repositorioinfo.loginpass.invalido");
 				that(!repoInfo.getLoginDBPass().isEmpty() || repoInfo.getLoginDBPass() == null, "", "repositorioinfo.logindbpass.invalido");
+				that(!repoInfo.getLoginWorkUser().isEmpty() || repoInfo.getLoginWorkUser() == null, "", "repositorioinfo.loginworkuser.invalido");
+				that(!repoInfo.getLoginWorkPass().isEmpty() || repoInfo.getLoginWorkPass() == null, "", "repositorioinfo.loginworkpass.invalido");
 			}});
 			
 			validator.onErrorForwardTo(SupervisorController.class).informacoesRepositorioODI(idProjeto);
 			
-			repoInfo.setLoginPass( Utilidades.md5(repoInfo.getLoginPass()) );
-			repoInfo.setLoginDBPass( Utilidades.md5(repoInfo.getLoginDBPass()) );
 			Projeto projeto = projetoDAO.pegarPorID(idProjeto);
 			projeto.setRepositorioInfo(repoInfo);
 			
@@ -159,8 +159,8 @@ public class RepositorioInfoRepositoryImpl implements RepositorioInfoRepository 
 
 	@Override
 	public boolean salvarNovaSenha(String novaSenha, String senhaAtual, String tipoSenha, Long idRepoInfo) {
-		senhaAtual = Utilidades.md5(senhaAtual);
-		novaSenha = Utilidades.md5(novaSenha);
+//		senhaAtual = Utilidades.md5(senhaAtual);
+//		novaSenha = Utilidades.md5(novaSenha);
 		
 		if (senhaAtual.equals(repositorioInfoDAO.pegarSenhaAtual(idRepoInfo, tipoSenha))) {
 			if (repositorioInfoDAO.salvarNovaSenha(novaSenha, tipoSenha, idRepoInfo))

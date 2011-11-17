@@ -9,7 +9,7 @@ public class Teste {
 	private Date dataCriacao;
 	private Date dataMoficacao;
 	private String descricao;
-	private Artefato artefato;
+	private CenarioODI artefato;
 	private List<ExecucaoTeste> execucoes;
 	
 	public Teste() {
@@ -48,11 +48,11 @@ public class Teste {
 		this.descricao = descricao;
 	}
 
-	public Artefato getArtefato() {
+	public CenarioODI getArtefato() {
 		return artefato;
 	}
 
-	public void setArtefato(Artefato artefato) {
+	public void setArtefato(CenarioODI artefato) {
 		this.artefato = artefato;
 	}
 

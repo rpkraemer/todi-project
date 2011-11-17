@@ -18,6 +18,7 @@
 		<input type="hidden" name="repoInfo.ID" value="${repositorioInfo.ID}"/>
 		<input type="hidden" name="repoInfo.loginPass" value="${repositorioInfo.loginPass}"/>
 		<input type="hidden" name="repoInfo.loginDBPass" value="${repositorioInfo.loginDBPass}"/>
+		<input type="hidden" name="repoInfo.loginWorkPass" value="${repositorioInfo.loginWorkPass}"/>
 		
 		<div class="clearfix">
 	    	<label for="repoInfo.loginName"> Projeto ODI </label>
@@ -53,6 +54,12 @@
 	        <label for="repoInfo.loginWorkRepository"> Work Repository do ODI </label>
 	        <div class="input">
 	        	<input class="xmedium" id="repoInfo.loginWorkRepository" name="repoInfo.loginWorkRepository" type="text" value="${repositorioInfo.loginWorkRepository}"/>
+	        </div>
+		</div>
+		<div class="clearfix">
+	        <label for="repoInfo.loginWorkRepository"> Usuário do Work Repository do ODI </label>
+	        <div class="input">
+	        	<input class="xmedium" id="repoInfo.loginWorkUser" name="repoInfo.loginWorkUser" type="text" value="${repositorioInfo.loginWorkUser}"/>
 	        </div>
 		</div>
 	</fieldset>

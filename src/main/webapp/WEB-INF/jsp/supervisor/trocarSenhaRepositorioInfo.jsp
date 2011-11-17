@@ -22,9 +22,10 @@
 <div class="clearfix">
 	<label for="usuario">Trocar a senha do</label>
 	<div class="input">
-		<select name="troca" id="troca">
-			<option value="DB" selected="selected">Usuário de Banco</option>
-			<option value="ODI">Usuário do Oracle Data Integrator</option>
+		<select name="troca" id="troca" style="width:290px">
+			<option value="DB_M" selected="selected">Usuário de Banco - Master</option>
+			<option value="DB_W">Usuário de Banco - Work</option>
+			<option value="ODI">Usuário do Oracle Data Integrator - Master</option>
 		</select>
 	</div>
 </div>
@@ -52,7 +53,7 @@
 	method="post"">
 	
 	<input type="hidden" name="idRepoInfo" id="idRepoInfo" value="${idRepoInfo}"/>
-	<input type="hidden" name="tipoSenha" id="tipoSenha" value="DB"/>
+	<input type="hidden" name="tipoSenha" id="tipoSenha" value="DB_M"/>
 	<div class="clearfix">
         <label for="senhaAtual"> Senha atual </label>
         <div class="input">
