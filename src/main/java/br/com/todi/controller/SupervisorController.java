@@ -1,5 +1,6 @@
 package br.com.todi.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.caelum.vraptor.Get;
@@ -10,9 +11,12 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.interceptor.multipart.UploadedFile;
 import br.com.todi.annotation.ProjetoAutenticado;
 import br.com.todi.annotation.Restrito;
+import br.com.todi.model.CenarioODI;
 import br.com.todi.model.Projeto;
 import br.com.todi.model.RepositorioInfo;
 import br.com.todi.model.Testador;
+import br.com.todi.persistence.repository.CenarioODIRepository;
+import br.com.todi.persistence.repository.ODIRepository;
 import br.com.todi.persistence.repository.ProjetoRepository;
 import br.com.todi.persistence.repository.RepositorioInfoRepository;
 import br.com.todi.persistence.repository.TestadorRepository;
@@ -28,16 +32,22 @@ public class SupervisorController {
 	private ProjetoRepository projetoRepository;
 	private TestadorRepository testadorRepository;
 	private RepositorioInfoRepository repositorioInfoRepository;
+	private CenarioODIRepository cenarioODIRepository;
+	private ODIRepository odiRepository;
 	private UsuarioSession usuarioSession;
 	
 	public SupervisorController(Result result, ProjetoRepository projetoRepository, 
 							    TestadorRepository testadorRepository, 
 							    RepositorioInfoRepository repositorioInfoRepository,
+							    CenarioODIRepository cenarioODIRepository,
+							    ODIRepository odiRepository,
 							    UsuarioSession usuarioSession) {
 		this.result = result;
 		this.projetoRepository = projetoRepository;
 		this.testadorRepository = testadorRepository;
 		this.repositorioInfoRepository = repositorioInfoRepository;
+		this.cenarioODIRepository = cenarioODIRepository;
+		this.odiRepository = odiRepository;
 		this.usuarioSession = usuarioSession;
 	}
 	
@@ -184,5 +194,46 @@ public class SupervisorController {
 			result.redirectTo(this).informacoesRepositorioODI(idProjeto);
 		}
 		result.forwardTo(this).informacoesRepositorioODI(idProjeto);
+	}
+	
+	@Get
+	@Path("/supervisor/projetos/{idProjeto}/informacao-repositorio-odi/cenarios")
+	@ProjetoAutenticado
+	public void cenariosODI(Long idProjeto) {
+		Projeto projeto = projetoRepository.pegarPorID(idProjeto);
+		result.include("cenariosExistentes", projeto.getCenariosODI());
+		result.include("idProjeto", idProjeto);
+	}
+	
+	@Get
+	@Path("/supervisor/projetos/{idProjeto}/informacao-repositorio-odi/buscar-cenarios")
+	@ProjetoAutenticado
+	public void buscarCenariosODI(Long idProjeto) {
+		Projeto projeto = projetoRepository.pegarPorID(idProjeto);
+		List<CenarioODI> cenariosODI = odiRepository.buscarCenariosODI(projeto);
+		result.include("cenariosODI", cenariosODI);
+		result.redirectTo(this).cenariosODI(idProjeto);
+	}
+	
+	@Post
+	@Path("/supervisor/projetos/{idProjeto}/informacao-repositorio-odi/importar-cenarios")
+	@ProjetoAutenticado
+	public void importarCenariosODI(Long idProjeto, List<String> cenariosODI) {
+		List<CenarioODI> cenariosParaSalvar = new ArrayList<CenarioODI>();
+		if (cenariosODI != null) {
+			for (String cenario : cenariosODI) {
+				String[] cenarioProperties = cenario.split("%");
+				CenarioODI cenarioODI = new CenarioODI(cenarioProperties[0], 
+													   cenarioProperties[2], 
+													   Long.parseLong(cenarioProperties[1]));
+				Projeto projeto = new Projeto();
+				projeto.setID(idProjeto);
+				cenarioODI.setProjeto(projeto);
+				cenariosParaSalvar.add(cenarioODI);
+			}
+		}
+		if (!cenariosParaSalvar.isEmpty())
+			cenarioODIRepository.saveList(cenariosParaSalvar);
+		result.redirectTo(this).cenariosODI(idProjeto);
 	}
 }

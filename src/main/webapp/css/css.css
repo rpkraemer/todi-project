@@ -1,7 +1,35 @@
 .hero-unit {
-	padding:15px
+	padding:15px;
 }
 
 .topbar ul {
 	float:right;
 }
+
+.cenarios {
+  background-color: #f5f5f5;
+  margin-top: 6px;
+  padding: 15px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+}
+
+.novo {
+	background-color:#CDEB8B;
+	font-size:16px;
+	font-weight:bold;
+}
+
+.novo span {
+	margin-left:15px;	
+}
+
+.input span {
+	font-size:14px;	
+}
+
+.checkbox_cenarios {
+		margin-right:25px;
+}
+	

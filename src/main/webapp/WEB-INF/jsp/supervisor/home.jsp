@@ -37,7 +37,7 @@
 </c:if>
 
 <c:if test="${!empty projetoList}">
-   <table class="zebra-striped">
+   <table class="bordered-table zebra-striped">
 			<thead>
 				<tr>
 					<th> ID </th>

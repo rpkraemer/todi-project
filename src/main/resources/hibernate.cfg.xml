@@ -24,6 +24,7 @@
 		<mapping class="br.com.todi.model.Projeto" />
 		<mapping class="br.com.todi.model.Testador" />
 		<mapping class="br.com.todi.model.RepositorioInfo" />
+		<mapping class="br.com.todi.model.CenarioODI" />
 
 	</session-factory>
 </hibernate-configuration>

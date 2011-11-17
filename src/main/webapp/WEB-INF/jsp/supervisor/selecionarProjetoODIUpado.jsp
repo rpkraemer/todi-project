@@ -41,8 +41,16 @@
 					<td> ${projeto.loginDBURL} </td>
 				</tr>
 				<tr>
-					<td> <strong>Nome do Repositório ODI:</strong> </td> 
+					<td> <strong>Nome do Repositório ODI (Work):</strong> </td> 
 					<td> ${projeto.loginWorkRepository} </td>
+				</tr>
+				<tr>
+					<td> <strong>Login do usuário de Banco de Dados do Repositório ODI (Work):</strong> </td> 
+					<td> <input class="span3" id="repoInfo.loginWorkUser" name="repoInfo.loginWorkUser" type="text" placeholder="Preencha o usuário"> </td>
+				</tr>
+				<tr>
+					<td> <strong>Senha - Usuário de Banco de Dados do Repositório ODI (Work):</strong> </td> 
+					<td> <input class="span3" id="repoInfo.loginWorkPass" name="repoInfo.loginWorkPass" type="password" placeholder="Preencha a senha"> </td>
 				</tr>
 				<tr>
 					<td colspan="2"> 

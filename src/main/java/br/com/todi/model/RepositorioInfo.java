@@ -40,6 +40,12 @@ public class RepositorioInfo {
 	@Column(length = 30)
 	private String loginWorkRepository;
 	
+	@Column(length = 100)
+	private String loginWorkUser;
+	
+	@Column(length = 250)
+	private String loginWorkPass;
+	
 	public RepositorioInfo() { }
 	
 	public RepositorioInfo(String loginName, String loginUser, String loginPass, String loginDBUser, String loginDBPass,
@@ -124,6 +130,22 @@ public class RepositorioInfo {
 
 	public void setLoginPass(String loginPass) {
 		this.loginPass = loginPass;
+	}
+
+	public String getLoginWorkUser() {
+		return loginWorkUser;
+	}
+
+	public void setLoginWorkUser(String loginWorkUser) {
+		this.loginWorkUser = loginWorkUser;
+	}
+
+	public String getLoginWorkPass() {
+		return loginWorkPass;
+	}
+
+	public void setLoginWorkPass(String loginWorkPass) {
+		this.loginWorkPass = loginWorkPass;
 	}
 	
 	

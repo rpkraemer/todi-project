@@ -21,7 +21,8 @@ public class RepositorioInfoDAOImpl extends GDAO<RepositorioInfo> implements Rep
 		Query query = null;
 		String coluna = "";
 		
-		if ("DB".equals(tipoSenha)) coluna = "loginDBPass"; 
+		if ("DB_M".equals(tipoSenha)) coluna = "loginDBPass";
+		else if ("DB_W".equals(tipoSenha)) coluna = "loginWorkPass";
 		else if ("ODI".equals(tipoSenha)) coluna = "loginPass";
 		
 		query = session.createQuery("select " + coluna + " from RepositorioInfo where ID = ?").
@@ -37,7 +38,8 @@ public class RepositorioInfoDAOImpl extends GDAO<RepositorioInfo> implements Rep
 		Query query = null;
 		String coluna = "";
 		
-		if ("DB".equals(tipoSenha)) coluna = "loginDBPass"; 
+		if ("DB_M".equals(tipoSenha)) coluna = "loginDBPass";
+		else if ("DB_W".equals(tipoSenha)) coluna = "loginWorkPass";
 		else if ("ODI".equals(tipoSenha)) coluna = "loginPass";
 		
 		query = session.createQuery("update RepositorioInfo set " + coluna + " = ? where ID = ?").

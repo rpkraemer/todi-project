@@ -13,6 +13,11 @@
 		<a href="<c:url value="/supervisor/projetos/${projeto.ID}/informacao-repositorio-odi"/>">
 			<div class="btn primary medium" id="testadores" style="margin-right:10px">Repositório ODI</div> 
 		</a>
+		<c:if test="${projeto.repositorioInfo != null}">
+			<a href="<c:url value="/supervisor/projetos/${projeto.ID}/informacao-repositorio-odi/cenarios"/>">
+				<div class="btn primary medium" id="testadores" style="margin-right:10px">Cenários ODI</div> 
+			</a>
+		</c:if>
 		<a onclick="return confirm('Deseja excluir ${projeto.nome}?')" 
 		   href="<c:url value="/supervisor/projetos/${projeto.ID}/deletar"/>">
 			<div class="btn danger medium" id="novoProjeto" style="float:right">Excluir Projeto</div> 

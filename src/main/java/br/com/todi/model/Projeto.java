@@ -38,11 +38,11 @@ public class Projeto {
 	@ForeignKey(name = "FK_PROJETO_REPOSITORIO")
 	private RepositorioInfo repositorioInfo;
 	
-	@OneToMany(mappedBy="projeto", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "projeto", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Testador> testadores;
 	
-	@Transient
-	private List<Artefato> artefatos;
+	@OneToMany(mappedBy = "projeto", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<CenarioODI> cenariosODI;
 	
 	@Transient
 	private Boolean isAutenticadoUserSession = false;
@@ -92,19 +92,19 @@ public class Projeto {
 		this.testadores = testadores;
 	}
 
-	public List<Artefato> getArtefatos() {
-		return artefatos;
-	}
-
-	public void setArtefatos(List<Artefato> artefatos) {
-		this.artefatos = artefatos;
-	}
-
 	public Boolean getIsAutenticadoUserSession() {
 		return isAutenticadoUserSession;
 	}
 
 	public void setIsAutenticadoUserSession(Boolean isAutenticadoUserSession) {
 		this.isAutenticadoUserSession = isAutenticadoUserSession;
+	}
+
+	public List<CenarioODI> getCenariosODI() {
+		return cenariosODI;
+	}
+
+	public void setCenariosODI(List<CenarioODI> cenariosODI) {
+		this.cenariosODI = cenariosODI;
 	}
 }
