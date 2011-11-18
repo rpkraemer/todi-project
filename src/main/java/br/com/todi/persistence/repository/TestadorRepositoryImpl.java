@@ -36,8 +36,8 @@ public class TestadorRepositoryImpl implements TestadorRepository {
 			validator.onErrorUsePageOf(SupervisorController.class).
 				editarTestador(idProjeto, testador.getID());
 		
-		//Seta a senha padrão para login no cadastro do testador
-		if (testador.getID() == null) testador.setSenha( Utilidades.md5("TODI") );
+		//Seta a senha inicial para o login sendo o campo usuário minúsculo
+		if (testador.getID() == null) testador.setSenha( Utilidades.md5(testador.getUsuario().toLowerCase()) );
 		testadorDAO.salvar(testador);
 	}
 
@@ -65,6 +65,11 @@ public class TestadorRepositoryImpl implements TestadorRepository {
 	public void salvar(Testador obj) {
 		// TODO Não utilizar
 		
+	}
+
+	@Override
+	public boolean testadorExistente(String usuario, String senha) {
+		return testadorDAO.testadorExistente(usuario, Utilidades.md5(senha));
 	}
 
 }

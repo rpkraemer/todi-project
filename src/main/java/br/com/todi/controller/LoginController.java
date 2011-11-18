@@ -5,17 +5,20 @@ import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
+import br.com.todi.persistence.repository.TestadorRepository;
 import br.com.todi.session.UsuarioSession;
 
 @Resource
 public class LoginController {
 	
 	private Result result;
+	private TestadorRepository testadorRepository;
 	private UsuarioSession usuarioSession;
 	
-	public LoginController(Result result, UsuarioSession usuarioSession) {
+	public LoginController(Result result, UsuarioSession usuarioSession, TestadorRepository testadorRepository) {
 		this.result = result;
 		this.usuarioSession = usuarioSession;
+		this.testadorRepository = testadorRepository;
 	}
 	
 	@Post
@@ -24,6 +27,9 @@ public class LoginController {
 		if (usuario.equals("SUPERVISOR") && senha.equals("TODI")) {
 			usuarioSession.setUsuario(usuario);
 			result.redirectTo(SupervisorController.class).home();
+		} else if (testadorRepository.testadorExistente(usuario, senha)){
+			usuarioSession.setUsuario(usuario);
+			result.redirectTo(TestadorController.class).home();
 		} else {
 			result.include("erro", "Login ou senha errados! Tente novamente").
 				   include("usuario", usuario);

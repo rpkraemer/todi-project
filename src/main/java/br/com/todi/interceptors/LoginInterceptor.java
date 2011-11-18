@@ -45,6 +45,9 @@ public class LoginInterceptor implements Interceptor {
 				if ("SUPERVISOR".equalsIgnoreCase(restrito.role()))
 					if ((Boolean) usuarioSession.getUsuario()[1])
 						stack.next(method, resourceInstance);
+				if ("TESTADOR".equalsIgnoreCase(restrito.role()))
+					if (!(Boolean) usuarioSession.getUsuario()[1])
+						stack.next(method, resourceInstance);
 			} else {
 				if (method.getMethod().isAnnotationPresent(Restrito.class)) {
 					Restrito restrito = method.getMethod().getAnnotation(Restrito.class);
