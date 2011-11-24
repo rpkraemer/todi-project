@@ -39,7 +39,7 @@
 	          	<a href="<c:url value="/supervisor"/>">TODI</a>
           	</c:if>
           	<c:if test="${usuarioCorrente != null and usuarioCorrente[1] == false}"> 
-	          	<a href="#">TODI</a>
+	          	<a href="<c:url value="/testador"/>">TODI</a>
           	</c:if>
           </h3>
           
@@ -56,17 +56,12 @@
     
     <div class="container">
     
-	    <div class="hero-unit">
-	    	<c:if test="${usuarioCorrente != null}">
-		    	<a href="<c:url value="/supervisor/projetos/novo"/>">
-					<div class="btn primary large" id="novoProjeto"> Novo Projeto </div>
-				</a>
-				<span style="float:right; font-weight:bold; margin-top:4px"> 
-					Bem-vindo(a) <span style="color:blue"> <c:out value="${usuarioCorrente[0]}"/> </span>
-					<c:if test="${usuarioCorrente[1] == true}">
-						<br/>
-						<strong>ADMINISTRADOR</strong>
-					</c:if>
-				</span>
-			</c:if> 
-		</div>
+	    <c:if test="${usuarioCorrente != null and usuarioCorrente[1] == true}">
+	    	<%@ include file="/WEB-INF/menu_supervisor.jsp" %>
+	    </c:if>
+	    <c:if test="${usuarioCorrente != null and usuarioCorrente[1] == false}">
+	    	<%@ include file="/WEB-INF/menu_testador.jsp" %>
+	    </c:if>
+	    <c:if test="${usuarioCorrente == null}">
+	    	<div class="hero-unit"> </div>
+	    </c:if>
